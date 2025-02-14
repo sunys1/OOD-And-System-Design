@@ -3,12 +3,12 @@ package parking_lot_system;
 public class Driver {
     private int id;
     private Vehicle vehicle;
-    private int paymentDue;
+    private int balance;
 
     public Driver(int id, Vehicle vehicle) {
         this.id = id;
         this.vehicle = vehicle;
-        this.paymentDue = 0;
+        this.balance = 0; //negative balance means insufficient funds
     }
 
     public int getId() {
@@ -19,7 +19,7 @@ public class Driver {
         return vehicle;
     }
 
-    public int getPaymentDue() {
-        return paymentDue;
+    public int getBalance() {
+        return balance;
     }
 }
