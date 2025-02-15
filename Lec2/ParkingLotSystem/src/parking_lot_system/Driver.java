@@ -3,23 +3,30 @@ package parking_lot_system;
 public class Driver {
     private int id;
     private Vehicle vehicle;
-    private int balance;
+    private double balance = 0.0;
+    private String paymentMethod;
 
-    public Driver(int id, Vehicle vehicle) {
+    public Driver(int id, Vehicle vehicle, String paymentMethod) {
         this.id = id;
         this.vehicle = vehicle;
-        this.balance = 0; //negative balance means insufficient funds
+        this.paymentMethod = paymentMethod;
     }
 
     public int getId() {
         return id;
     }
-
     public Vehicle getVehicle() {
         return vehicle;
     }
-
-    public int getBalance() {
+    public double getBalance() {
         return balance;
+    }
+    public String getPaymentMethod() {return paymentMethod;}
+
+    public void setBalance(double balance) {
+        this.balance = balance;
+    }
+    public void setPaymentMethod(String paymentMethod) {
+        this.paymentMethod = paymentMethod;
     }
 }
