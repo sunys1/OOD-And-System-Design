@@ -60,6 +60,8 @@ public class ParkingSystem {
         // check payment method and charge
         String paymentMethod = driver.getPaymentMethod();
         boolean isPaid = false;
+        Scanner scanner = new Scanner(System.in);
+        int newMethod;
 
         while(!isPaid){
             if (paymentMethod.equals(PaymentMethod.PREPAID.toString())) {
@@ -67,15 +69,14 @@ public class ParkingSystem {
                 if (parkingFee <= driverBalance) {
                     isPaid = true;
                     driver.setBalance(driverBalance - parkingFee);
-                    System.out.println("Payment Successful! Driver " + driverId + "'s new balance is: $" + driver.getBalance() + ".");
+                    System.out.println("Payment Successful! Driver " + driverId + "'s new balance: $" + driver.getBalance() + ".");
                 }else{
-                    System.out.println("Insufficient Funds! Payment Failed. Your balance: $" + driverBalance
+                    System.out.println("Insufficient Funds! Prepaid Payment Failed. Your balance: $" + driverBalance
                             + ". Your parking fee: $" + parkingFee + ".");
                     System.out.println("Please add funds or use a different payment method:\n"
                             + "1. Add Funds\n" + "2. Use a different payment method");
 
-                    Scanner scanner = new Scanner(System.in);
-                    int newMethod = scanner.nextInt();
+                    newMethod = scanner.nextInt();
                     // I suppose normally drivers would add funds through a mobile app or web app.
                     // But here is just to demo the simplified logic of adding funds, updating balance, and re-validating payment
                     if (newMethod == 1) {
@@ -83,7 +84,7 @@ public class ParkingSystem {
                         double fund = scanner.nextDouble();
                         driver.setBalance(driverBalance + fund);
                     }else if(newMethod == 2) {
-                        System.out.print("Please choose from the following payment methods: "
+                        System.out.print("Please choose from the following payment methods:\n"
                         + "1. MASTERCARD\n" + "2. VISA\n" + "2. DEBIT\n");
 
                         newMethod = scanner.nextInt();
@@ -98,7 +99,6 @@ public class ParkingSystem {
                         // Update driver payment method
                         driver.setPaymentMethod(paymentMethod);
                     }
-                    scanner.close();
                 }
             }else{ // Pay by MASTERCARD, VISA, or DEBIT
                 isPaid = true;
@@ -110,6 +110,7 @@ public class ParkingSystem {
                 ". Duration: " + hours + " hours, " + minutes % 60 + " minutes. Parking fee: $" + parkingFee
                 + " paid by " + driver.getPaymentMethod() + ".");
 
+        scanner.close();
         duration.remove(driverId);
         return garage.removeVehicle(driver.getVehicle());
     }
