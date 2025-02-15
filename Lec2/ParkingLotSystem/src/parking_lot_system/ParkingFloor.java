@@ -22,7 +22,7 @@ public class ParkingFloor {
                 l = r + 1;
             }
             if(r - l + 1 == size){
-                for(int i = l; i < r; i++){
+                for(int i = l; i <= r; i++){
                     spots[i] = 1;
                 }
 
